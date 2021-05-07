@@ -32,9 +32,14 @@ app.post('/', (req, res) => {
 
     const Option = {
         method: "POST",
-        auth: "tonystack422:fea6601e1ce82f4686df0187159a69ca-us1"
+        auth: "tonystack422:Api-Key"
     }
     const request = https.request(url, Option, (response) => {
+        if (response.statusCode === 200) {
+            res.sendFile(__dirname + "/success.html");
+        } else {
+            res.sendFile(__dirname + '/failure.html');
+        }
 
         response.on("data", (data) => {
             console.log(JSON.parse(data));
@@ -42,18 +47,15 @@ app.post('/', (req, res) => {
     });
     request.write(jsonData);
     request.end();
-    res.send("<body style='background-color:#3edbf0;'><center><h1>Subscribed in mail chimp</h1></center></body>")
 
 
 
 });
 
+app.post('/fail',(req,res)=>{
+    res.redirect('/');
+})
+
 app.listen(3000, () => {
     console.log("Server running in port 3000..");
 })
-
-
-//API Key
-//fea6601e1ce82f4686df0187159a69ca-us1
-//Audience id
-//8cd55bf6bb
