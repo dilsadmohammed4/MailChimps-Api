@@ -32,7 +32,7 @@ app.post('/', (req, res) => {
 
     const Option = {
         method: "POST",
-        auth: "tonystack422:Api-Key"
+        auth: "tonystack422:fea6601e1ce82f4686df0187159a69ca-us1"
     }
     const request = https.request(url, Option, (response) => {
         if (response.statusCode === 200) {
@@ -56,6 +56,6 @@ app.post('/fail',(req,res)=>{
     res.redirect('/');
 })
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("Server running in port 3000..");
 })
